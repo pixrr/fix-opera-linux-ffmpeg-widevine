@@ -15,7 +15,7 @@ readonly OPERA_FILE="$OPERA_FOLDER$FILE_NAME"
 readonly FIX_WIDEVINE=true
 readonly CHROME_DL_LINK="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 
-readonly GIT_API=https://api.github.com/repos/iteufel/nwjs-ffmpeg-prebuilt/releases
+readonly GIT_API=https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpeg-widevine/releases
 
 printf '\nGetting Url ...\n'
 
