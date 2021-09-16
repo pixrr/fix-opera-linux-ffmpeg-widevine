@@ -68,10 +68,12 @@
     ```rm -rf ./fix-opera-linux-ffmpeg-widevine```
 ### Autostart after upgrade
 
-1. Clone this repo
-    
-    ```git clone https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine.git```
+1. Clone this repo and switch branch
 
+    ```git clone https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine.git```
+    
+    ```git checkout lazy```
+    
 2. Create a **script** folder on **/root**
     
     ```sudo mkdir /root/.scripts```
