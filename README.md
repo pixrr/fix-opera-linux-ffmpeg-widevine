@@ -9,6 +9,7 @@
 * [Requirements](#Requirements)
 * [How use](#How-use)
 * [Create an alias](#Create-an-alias)
+* [Autostart after upgrade](#Autostart-after-upgrade)
 
 ### Requirements
 
@@ -61,6 +62,35 @@
 6. Update **.bashrc** file
     
     ```source ~/.bashrc```
+
+7. Delete the repo
+    
+    ```rm -rf ./fix-opera-linux-ffmpeg-widevine```
+### Autostart after upgrade
+
+1. Clone this repo
+    
+    ```git clone https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine.git```
+
+2. Create a **script** folder on **/root**
+    
+    ```sudo mkdir /root/.scripts```
+
+3. Copy the script into the **script** folder
+    
+    ```sudo cp ./fix-opera-linux-ffmpeg-widevine/fix-opera.sh /root/.scripts```
+
+4. Give execute permissions to the script file
+    
+    ```chmod +x /root/.scripts/fix-opera.sh```
+
+5. Copy apt config file into the **script** folder
+    
+    ```sudo cp ./fix-opera-linux-ffmpeg-widevine/99fix-opera /root/.scripts```
+
+6. Create symlink
+    
+    ```sudo ln -s /root/.scripts/99fix-opera /etc/apt/apt.conf.d/```
 
 7. Delete the repo
     
