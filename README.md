@@ -82,7 +82,7 @@
 
 4. Give execute permissions to the script file
     
-    ```chmod +x /root/.scripts/fix-opera.sh```
+    ```sudo chmod +x /root/.scripts/fix-opera.sh```
 
 5. Copy apt config file into the **script** folder
     
