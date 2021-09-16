@@ -20,9 +20,11 @@
 
 ### How use
 
-1. Clone this repo
+1. Clone this repo and switch barnch
 
     ```git clone https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine.git```
+    
+    ````git checkout alt-ffmpeg```
 
 2. Go to the repo root folder
 
