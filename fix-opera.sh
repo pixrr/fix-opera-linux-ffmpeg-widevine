@@ -15,11 +15,20 @@ readonly OPERA_FILE="$OPERA_FOLDER$FILE_NAME"
 readonly FIX_WIDEVINE=true
 readonly CHROME_DL_LINK="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 
-readonly GIT_API=https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpeg-widevine/releases
+readonly GIT_API_MAIN=https://api.github.com/repos/iteufel/nwjs-ffmpeg-prebuilt/releases
+readonly GIT_API_ALT=https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpeg-widevine/releases
 
 printf '\nGetting Url ...\n'
 
-readonly OPERA_FFMPEG_URL=$(curl -s $GIT_API | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
+readonly OPERA_FFMPEG_URL_MAIN=$(curl -s $GIT_API_MAIN | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
+readonly OPERA_FFMPEG_URL_ALT=$(curl -s $GIT_API_ALT | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
+
+if [ `basename $OPERA_FFMPEG_URL_MAIN` -ge `basename $OPERA_FFMPEG_URL_ALT` ]
+  then
+    readonly OPERA_FFMPEG_URL=$OPERA_FFMPEG_URL_MAIN
+  else
+    readonly OPERA_FFMPEG_URL=$OPERA_FFMPEG_URL_ALT
+fi
 
 printf '\nDownloading ffmpeg ...\n'
 
