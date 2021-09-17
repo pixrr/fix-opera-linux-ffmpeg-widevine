@@ -20,8 +20,8 @@ readonly GIT_API_ALT=https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpe
 
 printf '\nGetting Url ...\n'
 
-readonly OPERA_FFMPEG_URL_MAIN=$(curl -s $GIT_API_MAIN | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
-readonly OPERA_FFMPEG_URL_ALT=$(curl -s $GIT_API_ALT | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
+readonly OPERA_FFMPEG_URL_MAIN=$(wget -qO - $GIT_API_MAIN | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
+readonly OPERA_FFMPEG_URL_ALT=$(wget -qO - $GIT_API_ALT | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
 
 if [ `basename $OPERA_FFMPEG_URL_MAIN` -ge `basename $OPERA_FFMPEG_URL_ALT` ]
   then
@@ -63,6 +63,7 @@ if $FIX_WIDEVINE
 
     printf "\nDeleting temprorary files ...\n"
     rm -rf "$TEMP_FOLDER/chrome"
+    rm "$TEMP_FOLDER/$CHROME_PKG_NAME"
   else
     printf "\nInstalling WidevineCdm skipped\n"
 fi

@@ -13,8 +13,8 @@
 
 ### Requirements
 
-1. **wget**, **curl** (Is needed for downloading the ffmpeg lib and Chrome)
-    ```sudo apt install wget curl```
+1. **wget** (Is needed for downloading the ffmpeg lib and Chrome)
+    ```sudo apt install wget```
 
 2. **unzip** (Is needed for unzipping the downloaded file)
     ```sudo apt install unzip```
