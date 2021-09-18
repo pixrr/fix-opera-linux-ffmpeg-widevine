@@ -1,6 +1,6 @@
-# Fix Opera Linux ffmpeg
+# Fix Opera Linux ffmpeg & WidevineCdm
 
-* Fix Opera html5 media content.
+* Fix Opera html5 media content
 * It script must be execute all times opera will fails on showing html5 media content.
 * Now it also fixes WidevineCdm support for DRM video. You can try it on Vevo youtube channel for example.
 
@@ -16,8 +16,8 @@
 1. **wget** (Is needed for downloading the ffmpeg lib and Chrome)
     ```sudo apt install wget```
 
-2. **unzip** (Is needed for unzipping the downloaded file)
-    ```sudo apt install unzip```
+2. **unzip**, **binutils** (Is needed for unpacking the downloaded file)
+    ```sudo apt install unzip binutils```
 
 ### How use
 
@@ -66,7 +66,7 @@
 7. Delete the repo
     
     ```rm -rf ./fix-opera-linux-ffmpeg-widevine```
-### Autostart after upgrade
+### Autostart after upgrade (Debian-based distros)
 
 1. Clone this repo
 
@@ -92,6 +92,10 @@
     
     ```sudo ln -s /root/.scripts/99fix-opera /etc/apt/apt.conf.d/```
 
-7. Delete the repo
+7. (Optional) Create an **alias**
+
+    ```echo "alias fix-opera='sudo /root/.scripts/fix-opera.sh' # Opera fix HTML5 media" >> ~/.bashrc```
+
+8. Delete the repo
     
     ```rm -rf ./fix-opera-linux-ffmpeg-widevine```
