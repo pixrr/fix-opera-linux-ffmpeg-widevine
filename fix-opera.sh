@@ -23,7 +23,7 @@ printf '\nGetting Url ...\n'
 readonly OPERA_FFMPEG_URL_MAIN=$(wget -qO - $GIT_API_MAIN | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
 readonly OPERA_FFMPEG_URL_ALT=$(wget -qO - $GIT_API_ALT | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
 
-if [ `basename $OPERA_FFMPEG_URL_ALT` < `basename $OPERA_FFMPEG_URL_MAIN` ]
+if [ `basename $OPERA_FFMPEG_URL_ALT` \< `basename $OPERA_FFMPEG_URL_MAIN` ]
   then
     readonly OPERA_FFMPEG_URL=$OPERA_FFMPEG_URL_MAIN
   else
@@ -31,10 +31,10 @@ if [ `basename $OPERA_FFMPEG_URL_ALT` < `basename $OPERA_FFMPEG_URL_MAIN` ]
 fi
 
 printf '\nDownloading ffmpeg ...\n'
-wget $OPERA_FFMPEG_URL -O "$TEMP_FILE$ZIP_FILE"
+wget -q --show-progress $OPERA_FFMPEG_URL -O "$TEMP_FILE$ZIP_FILE"
 
 printf "\nUnzipping ...\n\n"
-unzip "$TEMP_FILE$ZIP_FILE" -d $TEMP_FILE
+unzip "$TEMP_FILE$ZIP_FILE" -d $TEMP_FILE > /dev/null
 
 printf "\nMoving file on $OPERA_FILE ...\n"
 mkdir -p "$OPERA_FOLDER/lib_extra"
@@ -49,7 +49,7 @@ if $FIX_WIDEVINE
     printf  "\nDownloading Google Chrome ...\n"
     mkdir "$TEMP_FOLDER/chrome"
     cd "$TEMP_FOLDER/chrome"
-    wget "$CHROME_DL_LINK"
+    wget -q --show-progress "$CHROME_DL_LINK"
 
     printf "\nExtracting Chrome to temporary folder ...\n"
     CHROME_PKG_NAME=`basename $CHROME_DL_LINK`
