@@ -47,6 +47,10 @@
         
         ```sudo ln -s ~root/.scripts/99fix-opera /etc/apt/apt.conf.d/```
 
+7. (*Optional*) You may disable Widevine fix if one that comes with Opera works well for you.
+
+    ```sudo sed '/FIX_WIDEVINE=/s/true/false/' ~root/.scripts/fix-opera.sh | sudo tee ~root/.scripts/fix-opera.sh```
+
 8. Delete the repo
     
     ```cd .. && rm -rf ./fix-opera-linux-ffmpeg-widevine```
