@@ -24,7 +24,7 @@
 
 3. (*Optional*) You may disable **Widevine** fix if one that comes with Opera works well for you.
 
-    ```sudo sed -i '/FIX_WIDEVINE=/s/true/false/g' ./fix-opera.sh```
+    ```sed -i '/FIX_WIDEVINE=/s/true/false/g' ./fix-opera.sh```
 
 4. Run script. And if it works well got ot next step.
     
