@@ -22,19 +22,23 @@
 
     ```cd ./fix-opera-linux-ffmpeg-widevine```
 
-3. (*Optional*) Now you can simply start the script with superuser rights, but I'd recommend to skip this step and go forward.
+3. (*Optional*) You may disable **Widevine** fix if one that comes with Opera works well for you.
+
+    ```sudo sed -i '/FIX_WIDEVINE=/s/true/false/g' ./fix-opera.sh```
+
+4. Run script. And if it works well got ot next step.
     
     ```sudo ./fix-opera.sh```
 
-4. Create a **.scripts** folder on **root**'s **home**
+5. Create a **.scripts** folder on **root**'s **home**
     
     ```sudo mkdir ~root/.scripts```
 
-5. Copy the script into the **.scripts** folder
+6. Copy the script into the **.scripts** folder
     
     ```sudo cp ./fix-opera.sh ~root/.scripts```
 
-6. Choose one or both options
+7. Choose one or both options
     * (*Optional*) Create an **alias**. And then you'll be able to start it by typing ```fix-opera``` command in terminal.
     
         ```echo "alias fix-opera='sudo ~root/.scripts/fix-opera.sh' # Opera fix HTML5 media" >> ~/.bashrc```
@@ -46,10 +50,6 @@
         ```sudo cp ./99fix-opera ~root/.scripts```
         
         ```sudo ln -s ~root/.scripts/99fix-opera /etc/apt/apt.conf.d/```
-
-7. (*Optional*) You may disable Widevine fix if one that comes with Opera works well for you.
-
-    ```sudo sed -i '/FIX_WIDEVINE=/s/true/false/g' ~root/.scripts/fix-opera.sh```
 
 8. Delete the repo
     
