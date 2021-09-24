@@ -19,11 +19,6 @@ readonly GIT_API_ALT=https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpe
 
 readonly WIDEVINE_VERSIONS=https://dl.google.com/widevine-cdm/versions.txt
 
-if ! which ar > /dev/null && $FIX_WIDEVINE; then
-  printf '\033[1mbinutils\033[0m package must be installed to fix Widevine\n'
-  exit 1
-fi
-
 if ! which unzip > /dev/null; then
   printf '\033[1munzip\033[0m package must be installed to run this script\n'
   exit 1
