@@ -9,8 +9,8 @@
 1. **wget** (Is needed for downloading the ffmpeg lib and Chrome)
     ```sudo apt install wget```
 
-2. **unzip**, **binutils** (Is needed for unpacking the downloaded file)
-    ```sudo apt install unzip binutils```
+2. **unzip** (Is needed for unpacking the downloaded file)
+    ```sudo apt install unzip```
 
 ## Usage
 

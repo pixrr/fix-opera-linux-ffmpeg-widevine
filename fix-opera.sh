@@ -6,17 +6,18 @@ if [[ $(whoami) != "root" ]]; then
   exit 1
 fi
 
-readonly TEMP_FOLDER='/tmp/'
+readonly TEMP_FOLDER='/tmp'
 readonly OPERA_FOLDER='/usr/lib/x86_64-linux-gnu/opera'
 readonly FILE_NAME='libffmpeg.so'
 readonly ZIP_FILE='.zip'
-readonly TEMP_FILE="$TEMP_FOLDER$FILE_NAME"
+readonly TEMP_FILE="$TEMP_FOLDER/$FILE_NAME"
 readonly OPERA_FILE="$OPERA_FOLDER/lib_extra/$FILE_NAME"
 readonly FIX_WIDEVINE=true
-readonly CHROME_DL_LINK="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 
 readonly GIT_API_MAIN=https://api.github.com/repos/iteufel/nwjs-ffmpeg-prebuilt/releases
 readonly GIT_API_ALT=https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpeg-widevine/releases
+
+readonly WIDEVINE_VERSIONS=https://dl.google.com/widevine-cdm/versions.txt
 
 if ! which ar > /dev/null && $FIX_WIDEVINE; then
   printf '\033[1mbinutils\033[0m package must be installed to fix Widevine\n'
@@ -65,29 +66,30 @@ mv -f "$TEMP_FILE/$FILE_NAME" $OPERA_FILE
 printf 'Deleting Temporary files ...\n'
 find $TEMP_FOLDER -name "*$FILE_NAME*" -delete
 
-if $FIX_WIDEVINE
-  then
-    rm -rf "$OPERA_FOLDER/lib_extra/WidevineCdm"
-    printf  "Downloading Google Chrome ...\n"
-    mkdir "$TEMP_FOLDER/chrome"
-    cd "$TEMP_FOLDER/chrome"
-    wget -q --show-progress "$CHROME_DL_LINK"
-    if [ $? -ne 0 ]; then
-      printf 'Failed to download Google Chrome. Check your internet connection or try later\n'
-      exit 1
-    fi
+if $FIX_WIDEVINE;  then
+  rm -rf "$OPERA_FOLDER/lib_extra/WidevineCdm"
+  printf  "Getting Widevine CDM download Url ...\n"
+  readonly WIDEVINE_LATEST=`wget -qO - $WIDEVINE_VERSIONS | tail -n1`
+  readonly WIDEVINE_URL="https://dl.google.com/widevine-cdm/$WIDEVINE_LATEST-linux-x64.zip"
 
-    printf "Extracting Chrome to temporary folder ...\n"
-    CHROME_PKG_NAME=`basename $CHROME_DL_LINK`
-    ar x "$CHROME_PKG_NAME"
-    tar xf data.tar.xz
+  printf  "Downloading Widevine CDM ...\n"
+  wget -q --show-progress "$WIDEVINE_URL" -O "$TEMP_FOLDER/widevine.zip"
+  if [ $? -ne 0 ]; then
+    printf 'Failed to download Widevine CDM. Check your internet connection or try later\n'
+    exit 1
+  fi
 
-    printf "Installing WidevineCdm ...\n"
-    cp -R "$TEMP_FOLDER/chrome/opt/google/chrome/WidevineCdm" "$OPERA_FOLDER/lib_extra/"
-    printf "[\n      {\n         \"preload\": \"$OPERA_FOLDER/lib_extra/WidevineCdm\"\n      }\n]\n" > "$OPERA_FOLDER/resources/widevine_config.json"
+  printf "Extracting Widevine CDM to temporary folder ...\n"
+  unzip "$TEMP_FOLDER/widevine.zip" -d $TEMP_FOLDER/widevine > /dev/null
 
-    printf "Deleting temprorary files ...\n"
-    rm -rf "$TEMP_FOLDER/chrome"
-  else
-    printf "Installing WidevineCdm skipped\n"
+  printf "Installing WidevineCdm ...\n"
+  mkdir -p "$OPERA_FOLDER/lib_extra/WidevineCdm/_platform_specific/linux_x64"
+  cp -R "$TEMP_FOLDER/widevine/manifest.json" "$OPERA_FOLDER/lib_extra/WidevineCdm/manifest.json"
+  cp -R "$TEMP_FOLDER/widevine/libwidevinecdm.so" "$OPERA_FOLDER/lib_extra/WidevineCdm/_platform_specific/linux_x64/libwidevinecdm.so"
+  printf "[\n      {\n         \"preload\": \"$OPERA_FOLDER/lib_extra/WidevineCdm\"\n      }\n]\n" > "$OPERA_FOLDER/resources/widevine_config.json"
+
+  printf "Deleting temprorary files ...\n"
+  rm -rf "$TEMP_FOLDER/widevine"
+else
+  printf "Installing WidevineCdm skipped\n"
 fi
