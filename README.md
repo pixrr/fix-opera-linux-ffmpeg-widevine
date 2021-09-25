@@ -14,15 +14,22 @@
 
 ## Usage
 
-1. Clone this repo
+1. Clone this repo and 
 
     ```git clone https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine.git```
     
 2. Go to the repo root folder
 
     ```cd ./fix-opera-linux-ffmpeg-widevine```
+    
+3. (*Optional*) Run script. And if it works well go to next step.
 
-3. Run install script and answer few questions.
+    ```sudo ./scripts/fix-opera.sh```
+
+4. Run install script and answer few questions.
     
     ```sudo ./install.sh```
-
+    
+5. Delete the repo
+    
+    ```rm -rf ./fix-opera-linux-ffmpeg-widevine```
