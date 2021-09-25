@@ -1,0 +1,12 @@
+# Fix video playback on Opera Upgrade/Install.
+
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = opera
+
+[Action]
+Description = Fix video playback in Opera browser
+When = PostTransaction
+Exec = /root/.scripts/fix-opera.sh
