@@ -17,19 +17,19 @@ create_hook ()
 	printf '	0. Other\n'
 	while read -p "Your choice: " DISTRIB; do
 		case $DISTRIB in
-		"1" )
-			cp -f $SCRIPT_PATH/scripts/99fix-opera $INSTALL_PATH
-			ln -sf $INSTALL_PATH/99fix-opera /etc/apt/apt.conf.d/
-			break;;
-		"2" )
-			cp -f $SCRIPT_PATH/scripts/fix-opera.hook $INSTALL_PATH /usr/share/libalpm/hooks
-			ln -sf $INSTALL_PATH/fix-opera.hook /usr/share/libalpm/hooks/
-			break;;
-		"0" )
-			printf "Autostart for your Linux distro is currently unsupported\n"
-			break;;
-		*   )
-			continue;;
+			"1" )
+				cp -f $SCRIPT_PATH/scripts/99fix-opera $INSTALL_PATH
+				ln -sf $INSTALL_PATH/99fix-opera /etc/apt/apt.conf.d/
+				break;;
+			"2" )
+				cp -f $SCRIPT_PATH/scripts/fix-opera.hook $INSTALL_PATH /usr/share/libalpm/hooks
+				ln -sf $INSTALL_PATH/fix-opera.hook /usr/share/libalpm/hooks/
+				break;;
+			"0" )
+				printf "Autostart for your Linux distro is currently unsupported\n"
+				break;;
+			*   )
+				continue;;
 		esac
 	done
 }
@@ -59,7 +59,7 @@ while read CREATE_ALIAS; do
 	case $CREATE_ALIAS in
 		"y" | "Y")
 			echo "alias fix-opera='sudo ~root/.scripts/fix-opera.sh' # Opera fix HTML5 media" >> $USER_HOME/.bashrc
-			printf "Alias will be available after your next logon.\n"
+			printf "Alias \"fix-opera\" will be available after your next logon.\n"
 			break;;
 		"n" | "N")	
 			break;;

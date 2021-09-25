@@ -6,8 +6,8 @@ if [[ $(whoami) != "root" ]]; then
 fi
 
 if [[ $(uname -m) != "x86_64" ]]; then
-  printf 'This script is intended for 64-bit systems\n'
-  exit 1
+	printf 'This script is intended for 64-bit systems\n'
+	exit 1
 fi
 
 if ! which unzip > /dev/null; then
