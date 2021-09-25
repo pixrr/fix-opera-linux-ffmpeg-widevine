@@ -6,8 +6,13 @@ if [[ $(whoami) != "root" ]]; then
   exit 1
 fi
 
+if [ $(uname -m) != "x86_64" ]; then
+  printf 'This script is intended for 64-bit systems\n'
+  exit 1
+fi
+
 readonly TEMP_FOLDER='/tmp'
-readonly OPERA_FOLDER='/usr/lib/x86_64-linux-gnu/opera'
+readonly OPERA_FOLDER=`dirname "$(readlink -f $(which opera))"`
 readonly FILE_NAME='libffmpeg.so'
 readonly ZIP_FILE='.zip'
 readonly TEMP_FILE="$TEMP_FOLDER/$FILE_NAME"
