@@ -9,4 +9,7 @@ Target = opera
 [Action]
 Description = Fix video playback in Opera browser
 When = PostTransaction
+Depends = bash
+Depends = wget
+Depends = unzip
 Exec = /root/.scripts/fix-opera.sh
