@@ -4,6 +4,21 @@ if [[ $(whoami) != "root" ]]; then
 	exit 1
 fi
 
+if [[ $(uname -m) != "x86_64" ]]; then
+	printf 'This script is intended for 64-bit systems\n'
+	exit 1
+fi
+
+if ! which unzip > /dev/null; then
+	printf '\033[1munzip\033[0m package must be installed to run this script\n'
+	exit 1
+fi
+
+if ! which wget > /dev/null; then
+	printf '\033[1mwget\033[0m package must be installed to run this script\n'
+	exit 1
+fi
+
 readonly SCRIPT_PATH=$(dirname $(readlink -f $0))
 readonly INSTALL_PATH="/root/.scripts"
 readonly USER_NAME="$(logname)"
@@ -20,10 +35,12 @@ create_hook ()
 			"1" )
 				cp -f $SCRIPT_PATH/scripts/99fix-opera $INSTALL_PATH
 				ln -sf $INSTALL_PATH/99fix-opera /etc/apt/apt.conf.d/
+				printf 'Now the script will run automatically every time apt installs or updates Opera.\n'
 				break;;
 			"2" )
 				cp -f $SCRIPT_PATH/scripts/fix-opera.hook $INSTALL_PATH /usr/share/libalpm/hooks
 				ln -sf $INSTALL_PATH/fix-opera.hook /usr/share/libalpm/hooks/
+				printf 'Now the script will run automatically every time pacman installs or updates Opera.\n'
 				break;;
 			"0" )
 				printf "Autostart for your Linux distro is currently unsupported\n"
@@ -34,6 +51,8 @@ create_hook ()
 	done
 }
 
+ptintf 'Installing script to ypur system...\n'
+
 printf 'Would you like to apply Widevine CDM fix? [y/n]'
 while read FIX_WIDEVINE; do
 	case $FIX_WIDEVINE in
@@ -41,7 +60,7 @@ while read FIX_WIDEVINE; do
 			printf 'Setting FIX_WIDEVINE to true...\n'
 			sed -i '/FIX_WIDEVINE=/s/false/true/g' $SCRIPT_PATH/scripts/fix-opera.sh
 			break;;
-		"n" | "N")	
+		"n" | "N")
 			printf 'Setting FIX_WIDEVINE to false...\n'
 			sed -i '/FIX_WIDEVINE=/s/true/false/g' $SCRIPT_PATH/scripts/fix-opera.sh
 			break;;
@@ -61,7 +80,7 @@ while read CREATE_ALIAS; do
 			echo "alias fix-opera='sudo ~root/.scripts/fix-opera.sh' # Opera fix HTML5 media" >> $USER_HOME/.bashrc
 			printf "Alias \"fix-opera\" will be available after your next logon.\n"
 			break;;
-		"n" | "N")	
+		"n" | "N")
 			break;;
 		*        )
 			printf "Would you like to create an alias for user $USER_NAME? [y/n]"
@@ -75,11 +94,10 @@ while read CREATE_HOOK; do
 		"y" | "Y")
 			create_hook
 			break;;
-		"n" | "N")	
+		"n" | "N")
 			break;;
 		*        )
 			printf "Would you like to create an alias for user $USER_NAME? [y/n]"
 			continue;;
 	esac
 done
-
