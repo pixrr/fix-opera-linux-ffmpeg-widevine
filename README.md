@@ -6,7 +6,7 @@
 
 ## Requirements
 
-1. **wget** (Is needed for downloading the ffmpeg lib and Chrome)
+1. **wget** (Is needed for downloading the ffmpeg lib and widevine)
     ```sudo apt install wget```
 
 2. **unzip** (Is needed for unpacking the downloaded file)
@@ -14,22 +14,22 @@
 
 ## Usage
 
-1. Clone this repo and 
+1. Clone this repo and
 
     ```git clone https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine.git```
-    
+
 2. Go to the repo root folder
 
     ```cd ./fix-opera-linux-ffmpeg-widevine```
-    
+
 3. (*Optional*) Run script. And if it works well go to next step.
 
     ```sudo ./scripts/fix-opera.sh```
 
 4. Run install script and answer few questions.
-    
+
     ```sudo ./install.sh```
-    
+
 5. Delete the repo
-    
-    ```rm -rf ./fix-opera-linux-ffmpeg-widevine```
+
+    ```cd .. && rm -rf ./fix-opera-linux-ffmpeg-widevine```

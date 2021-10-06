@@ -72,6 +72,7 @@ done
 
 mkdir -p $INSTALL_PATH
 cp -f $SCRIPT_PATH/scripts/fix-opera.sh $INSTALL_PATH
+chmod +x $INSTALL_PATH/fix-opera.sh
 
 printf "Would you like to create an alias for user $USER_NAME? [y/n]"
 while read CREATE_ALIAS; do
@@ -98,6 +99,20 @@ while read CREATE_HOOK; do
 			break;;
 		*        )
 			printf "Would you like to create an alias for user $USER_NAME? [y/n]"
+			continue;;
+	esac
+done
+
+printf "Would you like to run it now? [y/n]"
+while read RUN_NOW; do
+	case $RUN_NOW in
+		"y" | "Y")
+			$INSTALL_PATH/fix-opera.sh
+			break;;
+		"n" | "N")
+			break;;
+		*        )
+			printf "Would you like to run it now? [y/n]"
 			continue;;
 	esac
 done
