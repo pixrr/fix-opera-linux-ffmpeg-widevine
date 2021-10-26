@@ -29,6 +29,7 @@ create_hook ()
 	printf 'Choose your Linux distro:\n'
 	printf '	1. Debian-based (Debian/Ubuntu/Mint/etc.)\n'
 	printf '	2. Arch-based (Arch/Manjaro/etc.)\n'
+	printf '	3. RedHat-based (RedHat/Fedora/etc.)\n'
 	printf '	0. Other\n'
 	while read -p "Your choice: " DISTRIB; do
 		case $DISTRIB in
@@ -38,9 +39,14 @@ create_hook ()
 				printf 'Now the script will run automatically every time apt installs or updates Opera.\n'
 				break;;
 			"2" )
-				cp -f $SCRIPT_PATH/scripts/fix-opera.hook $INSTALL_PATH /usr/share/libalpm/hooks
+				cp -f $SCRIPT_PATH/scripts/fix-opera.hook $INSTALL_PATH
 				ln -sf $INSTALL_PATH/fix-opera.hook /usr/share/libalpm/hooks/
 				printf 'Now the script will run automatically every time pacman installs or updates Opera.\n'
+				break;;
+			"3" )
+				cp -f $SCRIPT_PATH/scripts/fix-opera.action $INSTALL_PATH
+				ln -sf $INSTALL_PATH/fix-opera.action /etc/dnf/plugins/post-transaction-actions.d/
+				printf 'Now the script will run automatically every time dnf installs or updates Opera.\n'
 				break;;
 			"0" )
 				printf "Autostart for your Linux distro is currently unsupported\n"
