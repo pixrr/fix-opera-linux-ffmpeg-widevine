@@ -44,6 +44,7 @@ create_hook ()
 				printf 'Now the script will run automatically every time pacman installs or updates Opera.\n'
 				break;;
 			"3" )
+				dnf install python3-dnf-plugin-post-transaction-actions -y
 				cp -f $SCRIPT_PATH/scripts/fix-opera.action $INSTALL_PATH
 				ln -sf $INSTALL_PATH/fix-opera.action /etc/dnf/plugins/post-transaction-actions.d/
 				printf 'Now the script will run automatically every time dnf installs or updates Opera.\n'
