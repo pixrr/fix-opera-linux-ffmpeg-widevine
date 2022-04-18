@@ -39,7 +39,7 @@ readonly OPERA_WIDEVINE_CONFIG="$OPERA_DIR/resources/widevine_config.json"
 #Getting download links
 printf 'Getting download links...\n'
 ##ffmpeg
-readonly FFMPEG_URL_MAIN=$(wget -qO - $FFMPEG_SRC_MAIN | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
+#readonly FFMPEG_URL_MAIN=$(wget -qO - $FFMPEG_SRC_MAIN | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
 readonly FFMPEG_URL_ALT=$(wget -qO - $FFMPEG_SRC_ALT | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
 [[ $(basename $FFMPEG_URL_ALT) < $(basename $FFMPEG_URL_MAIN) ]] && readonly FFMPEG_URL=$FFMPEG_URL_MAIN || readonly FFMPEG_URL=$FFMPEG_URL_ALT
 if [[ -z $FFMPEG_URL ]]; then
