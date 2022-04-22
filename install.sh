@@ -105,7 +105,7 @@ while read CREATE_HOOK; do
 		"n" | "N")
 			break;;
 		*        )
-			printf "Would you like to create an alias for user $USER_NAME? [y/n]"
+			printf "Would you like to run it automatically after each Opera update?? [y/n]"
 			continue;;
 	esac
 done
