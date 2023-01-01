@@ -23,7 +23,7 @@ fi
 #Config section
 readonly FIX_WIDEVINE=true
 readonly TEMP_DIR='/tmp'
-readonly FFMPEG_SRC_MAIN='https://api.github.com/repos/iteufel/nwjs-ffmpeg-prebuilt/releases'
+readonly FFMPEG_SRC_MAIN='https://api.github.com/repos/Ld-Hagen/nwjs-ffmpeg-prebuilt/releases'
 readonly FFMPEG_SRC_ALT='https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpeg-widevine/releases'
 readonly WIDEVINE_VERSIONS='https://dl.google.com/widevine-cdm/versions.txt'
 readonly FFMPEG_SO_NAME='libffmpeg.so'
@@ -39,7 +39,7 @@ readonly OPERA_WIDEVINE_CONFIG="$OPERA_DIR/resources/widevine_config.json"
 #Getting download links
 printf 'Getting download links...\n'
 ##ffmpeg
-#readonly FFMPEG_URL_MAIN=$(wget -q4O - $FFMPEG_SRC_MAIN | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
+readonly FFMPEG_URL_MAIN=$(wget -q4O - $FFMPEG_SRC_MAIN | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
 readonly FFMPEG_URL_ALT=$(wget -q4O - $FFMPEG_SRC_ALT | grep browser_download_url | cut -d '"' -f 4 | grep linux-x64 | head -n 1)
 [[ $(basename $FFMPEG_URL_ALT) < $(basename $FFMPEG_URL_MAIN) ]] && readonly FFMPEG_URL=$FFMPEG_URL_MAIN || readonly FFMPEG_URL=$FFMPEG_URL_ALT
 if [[ -z $FFMPEG_URL ]]; then
