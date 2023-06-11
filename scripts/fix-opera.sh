@@ -33,11 +33,11 @@ readonly WIDEVINE_MANIFEST_NAME='manifest.json'
 OPERA_VERSIONS=()
 
 if [ -x "$(command -v opera)" ]; then
-  OPERA_VERSIONS+="opera"
+  OPERA_VERSIONS+=("opera")
 fi
 
 if [ -x "$(command -v opera-beta)" ]; then
-  OPERA_VERSIONS+="opera-beta"
+  OPERA_VERSIONS+=("opera-beta")
 fi
 
 for opera in ${OPERA_VERSIONS[@]}; do
