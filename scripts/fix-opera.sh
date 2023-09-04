@@ -20,8 +20,12 @@ if ! which wget > /dev/null; then
 	exit 1
 fi
 
+if which pacman > /dev/null; then
+	ARCH_SYSTEM=true
+fi
+
 #Config section
-readonly FIX_WIDEVINE=true
+readonly FIX_WIDEVINE=false
 readonly TEMP_DIR='/tmp'
 readonly FFMPEG_SRC_MAIN='https://api.github.com/repos/Ld-Hagen/nwjs-ffmpeg-prebuilt/releases'
 readonly FFMPEG_SRC_ALT='https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpeg-widevine/releases'
@@ -87,8 +91,11 @@ fi
 for opera in ${OPERA_VERSIONS[@]}; do
   echo "Doing $opera"
   EXECUTABLE=$(command -v "$opera")
-
-  OPERA_DIR=$(dirname $(readlink -f $EXECUTABLE))
+	if [[ $ARCH_SYSTEM -eq true ]]; then
+		OPERA_DIR="/usr/lib/$opera"
+	else
+		OPERA_DIR=$(dirname $(readlink -f $EXECUTABLE))
+	fi
   OPERA_LIB_DIR="$OPERA_DIR/lib_extra"
   OPERA_WIDEVINE_DIR="$OPERA_LIB_DIR/WidevineCdm"
   OPERA_WIDEVINE_SO_DIR="$OPERA_WIDEVINE_DIR/_platform_specific/linux_x64"
