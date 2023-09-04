@@ -25,7 +25,7 @@ if which pacman > /dev/null; then
 fi
 
 #Config section
-readonly FIX_WIDEVINE=false
+readonly FIX_WIDEVINE=true
 readonly TEMP_DIR='/tmp'
 readonly FFMPEG_SRC_MAIN='https://api.github.com/repos/Ld-Hagen/nwjs-ffmpeg-prebuilt/releases'
 readonly FFMPEG_SRC_ALT='https://api.github.com/repos/Ld-Hagen/fix-opera-linux-ffmpeg-widevine/releases'
