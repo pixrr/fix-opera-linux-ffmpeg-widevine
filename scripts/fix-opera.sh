@@ -20,6 +20,10 @@ if ! which wget > /dev/null; then
 	exit 1
 fi
 
+if which pacman > /dev/null; then
+	ARCH_SYSTEM=true
+fi
+
 #Config section
 readonly FIX_WIDEVINE=true
 readonly TEMP_DIR='/tmp'
@@ -87,8 +91,11 @@ fi
 for opera in ${OPERA_VERSIONS[@]}; do
   echo "Doing $opera"
   EXECUTABLE=$(command -v "$opera")
-
-  OPERA_DIR=$(dirname $(readlink -f $EXECUTABLE))
+	if [[ $ARCH_SYSTEM -eq true ]]; then
+		OPERA_DIR="/usr/lib/$opera"
+	else
+		OPERA_DIR=$(dirname $(readlink -f $EXECUTABLE))
+	fi
   OPERA_LIB_DIR="$OPERA_DIR/lib_extra"
   OPERA_WIDEVINE_DIR="$OPERA_LIB_DIR/WidevineCdm"
   OPERA_WIDEVINE_SO_DIR="$OPERA_WIDEVINE_DIR/_platform_specific/linux_x64"
