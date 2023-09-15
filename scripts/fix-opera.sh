@@ -91,7 +91,7 @@ fi
 for opera in ${OPERA_VERSIONS[@]}; do
   echo "Doing $opera"
   EXECUTABLE=$(command -v "$opera")
-	if [[ $ARCH_SYSTEM -eq true ]]; then
+	if [[ "$ARCH_SYSTEM" == true ]]; then
 		OPERA_DIR=$(dirname $(cat $EXECUTABLE | grep exec | cut -d ' ' -f 2))
 	else
 		OPERA_DIR=$(dirname $(readlink -f $EXECUTABLE))
