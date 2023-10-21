@@ -3,6 +3,8 @@
 * Fixes Opera html5 media content including DRM-protected one.
 * This script must be executed all times opera fails on showing html5 media content.
 * On Debian-based, RedHat-based and Arch-based distributions it could be started automatically after Opera each update or reinstall.
+* Works only with native versions of Opera. Won't work with flatpak/snap releses.
+* May not work with opera-beta and opera-develper.
 
 ## Requirements
 
