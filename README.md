@@ -51,6 +51,10 @@
 
     `cd /tmp/fix-opera-linux-ffmpeg-widevine`
 
-3. Run uninstallation script. And if it works well go to next step.
+3. Make uninstall.sh executable
+
+   `chmod +x uninstall.sh`
+
+5. Run uninstallation script. And if it works well go to next step.
 
     `sudo ./uninstall.sh`
