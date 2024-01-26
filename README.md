@@ -41,6 +41,16 @@
 
     `sudo ./install.sh`
 
-5. Delete the repo
+## How to uninstall
 
-    `cd .. && rm -rf ./fix-opera-linux-ffmpeg-widevine`
+1. Clone this repo
+
+    `cd /tmp && git clone https://github.com/Ld-Hagen/fix-opera-linux-ffmpeg-widevine.git`
+
+2. Go to the repo root folder
+
+    `cd /tmp/fix-opera-linux-ffmpeg-widevine`
+
+3. Run uninstallation script. And if it works well go to next step.
+
+    `sudo ./uninstall.sh`
