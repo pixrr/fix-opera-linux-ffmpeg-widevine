@@ -40,6 +40,10 @@ if [ -x "$(command -v opera)" ]; then
   OPERA_VERSIONS+=("opera")
 fi
 
+if [ -x "$(command -v opera-developer)" ]; then
+  OPERA_VERSIONS+=("opera-developer")
+fi
+
 if [ -x "$(command -v opera-beta)" ]; then
   OPERA_VERSIONS+=("opera-beta")
 fi
