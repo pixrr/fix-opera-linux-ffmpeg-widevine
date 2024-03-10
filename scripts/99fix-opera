@@ -1,2 +1,2 @@
-DPkg::Pre-Invoke {"stat -c %Z $(readlink -f $(which opera)) > /tmp/opera.timestamp";};
-DPkg::Post-Invoke {"if [ `stat -c %Z $(readlink -f $(which opera))` -ne `cat /tmp/opera.timestamp` ]; then /root/.scripts/fix-opera.sh; fi; rm /tmp/opera.timestamp";};
+DPkg::Pre-Invoke {"stat -c %Z $(readlink -f $(command -v opera || command -v opera-beta || command -v opera-developer)) > /tmp/opera.timestamp";};
+DPkg::Post-Invoke {"if [ `stat -c %Z $(readlink -f $(command -v opera || command -v opera-beta || command -v opera-developer))` -ne `cat /tmp/opera.timestamp` ]; then /root/.scripts/fix-opera.sh; fi; rm /tmp/opera.timestamp";};
